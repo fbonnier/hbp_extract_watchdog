@@ -19,9 +19,9 @@ def extract_watchdog_to_json (watchdog_file:str, json_file:str):
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description='Extract watchdog list of files to HBP JSON metadata')
-    parser.add_argument('--json', type=argparse.FileType('r'), metavar='json', nargs='1',
+    parser.add_argument('--json', type=argparse.FileType('r'), metavar='json', nargs=1,
                         help='JSON File containing in which metadata of files are extracted', required=True)
-    parser.add_argument('--watchdog', type=argparse.FileType('r'), metavar='watchdog', nargs='1',
+    parser.add_argument('--watchdog', type=argparse.FileType('r'), metavar='watchdog', nargs=1,
                         help='Watchdog File containing files to extract to JSON report', required=True)
 
 
