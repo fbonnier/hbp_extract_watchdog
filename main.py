@@ -31,7 +31,7 @@ if __name__ == "__main__":
     watchdog_file = args.watchdog[0]
 
     # Convert watchdog list to JSON content
-    json_content = extract_watchdog_to_json (watchdog_file, json_file)
+    json_content = extract_watchdog_to_json (watchdog_file.name, json_file).name
 
     # Write JSON content to JSON file
     with open(json_file, "w") as f:
