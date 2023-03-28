@@ -6,14 +6,15 @@ def extract_watchdog_to_json (watchdog_file:str, json_file:str):
     
     list_of_outputs = []
 
-    with open (watchdog_file, 'r') as f:
-        singletons = list(dict.fromkeys(f.readlines()))
+    with open (watchdog_file, 'r') as watchdog_f:
+        singletons = list(dict.fromkeys(watchdog_f.readlines()))
 
         for ifile in singletons:
             list_of_outputs.append({"url": None, "path": ifile})
-
-    json_content = json.load(json_file)
-    json_content["Outputs"] = list_of_outputs
+    json_content=None
+    with open (json_file, 'r') as json_f:
+        json_content = json.load(json_f)
+        json_content["Outputs"] = list_of_outputs
     return json_content
 
 if __name__ == "__main__":
