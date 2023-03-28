@@ -35,7 +35,7 @@ if __name__ == "__main__":
     json_content = extract_watchdog_to_json (watchdog_file.name, json_file.name)
 
     # Write JSON content to JSON file
-    with open(json_file, "w") as f:
+    with open(json_file.name, "w") as f:
         json.dump(json_content, f, indent=4) 
     # Exit Done ?
     sys.exit()
