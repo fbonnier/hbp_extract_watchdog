@@ -1,6 +1,8 @@
 import argparse
 import json
 import sys
+import os
+from nilsimsa import Nilsimsa
 
 def extract_watchdog_to_json (watchdog_file:str, json_file:str):
     
@@ -10,7 +12,10 @@ def extract_watchdog_to_json (watchdog_file:str, json_file:str):
         singletons = list(dict.fromkeys(watchdog_f.readlines()))
 
         for ifile in singletons:
-            list_of_outputs.append({"url": None, "path": ifile.replace("\n", "")})
+            filepath = ifile.replace("\n", "")
+            all_info = os.path.basename(filepath) + str(os.path.getsize(filepath))
+            filehash = Nilsimsa(all_info).hexdigest()
+            list_of_outputs.append({"url": None, "path": filepath, "hash": filehash})
     json_content=None
     with open (json_file, 'r') as json_f:
         json_content = json.load(json_f)
