@@ -15,7 +15,7 @@ def extract_watchdog_to_json (watchdog_file:str, json_file:str):
         for ifile in singletons:
             for iexception in exceptions:
                 if iexception in ifile:
-                    singletons.remove(ifile)
+                    singletons.remove(singletons[ifile])
         
         for ifile in singletons:
             filepath = ifile.replace("\n", "")
