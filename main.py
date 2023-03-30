@@ -10,7 +10,7 @@ def extract_watchdog_to_json (watchdog_file:str, json_file:str):
         singletons = list(dict.fromkeys(watchdog_f.readlines()))
 
         for ifile in singletons:
-            list_of_outputs.append({"url": None, "path": ifile})
+            list_of_outputs.append({"url": None, "path": ifile.replace("\n", "")})
     json_content=None
     with open (json_file, 'r') as json_f:
         json_content = json.load(json_f)
