@@ -17,13 +17,14 @@ def extract_watchdog_to_json (watchdog_file:str, json_file:str):
                 if iexception in ifile:
                     singletons.remove(ifile)
         
-        print (singletons)
-
         for ifile in singletons:
             filepath = ifile.replace("\n", "")
             all_info = os.path.basename(filepath) + str(os.path.getsize(filepath))
             filehash = Nilsimsa(all_info).hexdigest()
             list_of_outputs.append({"url": None, "path": filepath, "hash": filehash})
+
+        print (singletons)
+
     json_content = None
     with open (json_file, 'r') as json_f:
         json_content = json.load(json_f)
