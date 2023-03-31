@@ -12,15 +12,22 @@ def extract_watchdog_to_json (watchdog_file:str, json_file:str):
 
     with open (watchdog_file, 'r') as watchdog_f:
         singletons = list(dict.fromkeys(watchdog_f.readlines()))
-        singletons_to_remove = [ifile for ifile in singletons for iexception in exceptions if iexception in ifile ]
+        singletons_tmp = [ifile for ifile in singletons for iexception in exceptions if iexception in ifile ]
 
-        for itoremove in singletons_to_remove:
+        for itoremove in singletons_tmp:
             singletons.remove(itoremove)
 
-        print (singletons)
+        # # Split and append multiple files seperated by space
+        # # TODO
+        # singletons_tmp = []
+        # for ifile in singletons:
+        #     for isubfile in ifile.split(" "):
+        #         singletons_tmp.append (isubfile)
+        # singletons.append(singletons_tmp)
         
         for ifile in singletons:
             filepath = ifile.replace("\n", "")
+            filepath = ifile.replace(" ", "")
             all_info = os.path.basename(filepath) + str(os.path.getsize(filepath))
             filehash = Nilsimsa(all_info).hexdigest()
             list_of_outputs.append({"url": None, "path": filepath, "hash": filehash})
