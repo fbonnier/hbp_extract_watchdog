@@ -12,7 +12,10 @@ def extract_watchdog_to_json (watchdog_file:str, json_file:str):
 
     with open (watchdog_file, 'r') as watchdog_f:
         singletons = list(dict.fromkeys(watchdog_f.readlines()))
-        singletons = [ifile for ifile in singletons for iexception in exceptions if iexception in ifile ]
+        singletons_to_remove = [ifile for ifile in singletons for iexception in exceptions if iexception in ifile ]
+
+        for itoremove in singletons_to_remove:
+            singletons.remove(itoremove)
 
         print (singletons)
         
