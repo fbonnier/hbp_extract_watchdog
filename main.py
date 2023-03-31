@@ -4,7 +4,7 @@ import sys
 import os
 from nilsimsa import Nilsimsa
 
-exceptions = [".cache"]
+exceptions = [".cache", ".cython", "__pycache__"]
 
 def extract_watchdog_to_json (watchdog_file:str, json_file:str):
     
