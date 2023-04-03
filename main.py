@@ -17,9 +17,10 @@ def extract_watchdog_to_json (watchdog_file:str, json_file:str):
         # Split and append multiple files seperated by space
         singletons_to_add = []
         for ifile in singletons:
-            for isubfile in ifile.split(" "):
-                singletons_to_add.append (isubfile)
-            singletons_to_remove.append(ifile)
+            if " " in ifile:
+                for isubfile in ifile.split(" "):
+                    singletons_to_add.append (isubfile)
+                singletons_to_remove.append(ifile)
         singletons = singletons + singletons_to_add
 
         # Remove remaining duplicates in files to remove
