@@ -29,7 +29,7 @@ def extract_watchdog_to_json (watchdog_file:str, json_file:str):
         singletons_tmp = singletons
         singletons = []
         for itokeep in singletons_tmp:
-            if itokeep not in singletons_to_remove:
+            if  not (itokeep in singletons_to_remove):
                 singletons.append(itokeep)
 
         print ("Singletons to remove")
