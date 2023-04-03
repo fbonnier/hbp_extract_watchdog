@@ -11,43 +11,32 @@ def extract_watchdog_to_json (watchdog_file:str, json_file:str):
     list_of_outputs = []
 
     with open (watchdog_file, 'r') as watchdog_f:
-        singletons = list(dict.fromkeys(watchdog_f.readlines()))
+        # singletons = list(dict.fromkeys(watchdog_f.readlines()))
+        
+        singletons = []
+        # Remove line breaks and space seperated multi-files
+        for ifile in watchdog_f.readlines():
+            ifile_to_add = ifile
+            if "\n" in ifile_to_add:
+                ifile_to_add = ifile_to_add.replace("\n", "")
+            if " " in ifile_to_add:
+                for isubfile in ifile_to_add.split(" "):
+                    singletons.append (isubfile)
+            else:
+                singletons.append(ifile_to_add)
 
-        # Add exception to remove
-        # singletons_to_remove = [ifile for ifile in singletons for iexception in exceptions if iexception in ifile]
-        singletons_to_remove = []
-        for ifile in singletons:
+        # Remove duplicates
+        singletons_all = list(dict.fromkeys(singletons))
+        singletons = []
+        # Remove exceptions
+        for ifile in singletons_all:
+            is_exception = False
             for iexception in exceptions:
                 if iexception in ifile:
-                    singletons_to_remove.append(ifile)
+                    is_exception = True
+            if not is_exception:
+                singletons.append(ifile)
 
-        
-        print ("Exceptions to remove")
-        print (singletons_to_remove)
-        print ("\n")
-
-        # Split and append multiple files seperated by space
-        singletons_to_add = []
-        for ifile in singletons:
-            if " " in ifile:
-                for isubfile in ifile.split(" "):
-                    singletons_to_add.append (isubfile)
-                singletons_to_remove.append(ifile)
-        singletons = singletons + singletons_to_add
-
-        # Remove remaining duplicates in files to remove
-        singletons_to_remove = list(dict.fromkeys(singletons_to_remove))
-
-        # Remove temporary files
-        singletons_tmp = singletons
-        singletons = []
-        for itokeep in singletons_tmp:
-            if  not (itokeep in singletons_to_remove):
-                singletons.append(itokeep)
-
-        print ("Singletons to remove")
-        print (singletons_to_remove)
-        print ("\n")
         print ("Singletons")
         print (singletons)
 
@@ -55,10 +44,9 @@ def extract_watchdog_to_json (watchdog_file:str, json_file:str):
         singletons = list(dict.fromkeys(singletons))
         
         for ifile in singletons:
-            filepath = ifile.replace("\n", "")
-            all_info = os.path.basename(filepath) + str(os.path.getsize(filepath))
+            all_info = os.path.basename(ifile) + str(os.path.getsize(ifile))
             filehash = Nilsimsa(all_info).hexdigest()
-            list_of_outputs.append({"url": None, "path": filepath, "hash": filehash})
+            list_of_outputs.append({"url": None, "path": ifile, "hash": filehash})
 
         
     json_content = None
