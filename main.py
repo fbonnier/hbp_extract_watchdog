@@ -37,9 +37,6 @@ def extract_watchdog_to_json (watchdog_file:str, json_file:str):
             if not is_exception and ifile:
                 singletons.append(ifile)
 
-        print ("Singletons")
-        print (singletons)
-
         # Remove remaining duplicates
         singletons = list(dict.fromkeys(singletons))
         
