@@ -32,6 +32,12 @@ def extract_watchdog_to_json (watchdog_file:str, json_file:str):
             if itokeep not in singletons_to_remove:
                 singletons.append(itokeep)
 
+        print ("Singletons to remove")
+        print (singletons_to_remove)
+        print ("\n")
+        print ("Singletons")
+        print (singletons)
+
         # Remove remaining duplicates
         singletons = list(dict.fromkeys(singletons))
         
