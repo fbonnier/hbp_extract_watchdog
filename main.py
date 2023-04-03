@@ -25,9 +25,12 @@ def extract_watchdog_to_json (watchdog_file:str, json_file:str):
         # Remove remaining duplicates in files to remove
         singletons_to_remove = list(dict.fromkeys(singletons_to_remove))
 
-        # Remove useless space seperated strings and exceptions
-        for itoremove in singletons_to_remove:
-            singletons.remove(itoremove)
+        # Remove temporary files
+        singletons_tmp = singletons
+        singletons = []
+        for itokeep in singletons_tmp:
+            if itokeep not in singletons_to_remove:
+                singletons.append(itokeep)
 
         # Remove remaining duplicates
         singletons = list(dict.fromkeys(singletons))
