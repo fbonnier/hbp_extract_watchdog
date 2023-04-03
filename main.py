@@ -34,7 +34,7 @@ def extract_watchdog_to_json (watchdog_file:str, json_file:str):
             for iexception in exceptions:
                 if iexception in ifile:
                     is_exception = True
-            if not is_exception:
+            if not is_exception and ifile:
                 singletons.append(ifile)
 
         print ("Singletons")
