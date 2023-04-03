@@ -21,6 +21,11 @@ def extract_watchdog_to_json (watchdog_file:str, json_file:str):
                 if iexception in ifile:
                     singletons_to_remove.append(ifile)
 
+        
+        print ("Exceptions to remove")
+        print (singletons_to_remove)
+        print ("\n")
+
         # Split and append multiple files seperated by space
         singletons_to_add = []
         for ifile in singletons:
