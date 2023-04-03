@@ -22,9 +22,11 @@ def extract_watchdog_to_json (watchdog_file:str, json_file:str):
             singletons_to_remove.append(ifile)
         singletons = singletons + singletons_to_add
 
+        # Remove remaining duplicates in files to remove
+        singletons_to_remove = list(dict.fromkeys(singletons_to_remove))
+
         # Remove useless space seperated strings and exceptions
         for itoremove in singletons_to_remove:
-            print ("Try to remove " + itoremove)
             singletons.remove(itoremove)
 
         # Remove remaining duplicates
