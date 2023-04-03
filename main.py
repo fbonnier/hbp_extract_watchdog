@@ -24,6 +24,7 @@ def extract_watchdog_to_json (watchdog_file:str, json_file:str):
 
         # Remove useless space seperated strings and exceptions
         for itoremove in singletons_to_remove:
+            print ("Try to remove " + itoremove)
             singletons.remove(itoremove)
 
         # Remove remaining duplicates
