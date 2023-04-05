@@ -43,7 +43,7 @@ def extract_watchdog_to_json (watchdog_file:str, json_file:str):
         for ifile in singletons:
             all_info = os.path.basename(ifile) + str(os.path.getsize(ifile))
             filehash = Nilsimsa(all_info).hexdigest()
-            list_of_outputs.append({"url": None, "path": ifile, "hash": filehash})
+            list_of_outputs.append({"url": None, "path": ifile, "hash": filehash, "size": os.path.getsize(ifile), "filename": os.path.basename(ifile)})
 
         
     json_content = None
